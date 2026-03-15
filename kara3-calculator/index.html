@@ -1,0 +1,275 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kara3 Pricing & Profit Calculator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <header>
+        <div class="header-inner">
+            <h1>Kara3</h1>
+            <p class="subtitle">Pricing & Profit Calculator</p>
+        </div>
+    </header>
+
+    <main>
+        <!-- Preset Buttons -->
+        <section class="presets-bar">
+            <span class="presets-label">Presets:</span>
+            <button class="preset-btn" data-preset="moissanite-ring">Moissanite Ring</button>
+            <button class="preset-btn" data-preset="zultanite-necklace">Zultanite Necklace</button>
+            <button class="preset-btn" data-preset="silver-bracelet">Silver Bracelet</button>
+            <button class="preset-btn" data-preset="gold-plated-earrings">Gold-Plated Earrings</button>
+        </section>
+
+        <div class="layout">
+            <!-- INPUT PANEL -->
+            <section class="panel input-panel">
+                <h2>Product & Cost Inputs</h2>
+
+                <div class="field-group">
+                    <label for="productName">Product Name</label>
+                    <input type="text" id="productName" placeholder="e.g. Moissanite Ring">
+                </div>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <label for="currency">Currency</label>
+                        <select id="currency">
+                            <option value="EUR">EUR (€)</option>
+                            <option value="USD">USD ($)</option>
+                            <option value="TRY">TRY (₺)</option>
+                            <option value="GBP">GBP (£)</option>
+                        </select>
+                    </div>
+                    <div class="field-group">
+                        <label for="productCost">Product Cost</label>
+                        <input type="number" id="productCost" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <label for="shippingCost">Shipping Cost</label>
+                        <input type="number" id="shippingCost" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="field-group">
+                        <label for="packagingCost">Packaging Cost</label>
+                        <input type="number" id="packagingCost" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <label for="paymentFeePercent">Payment Processing Fee (%)</label>
+                        <input type="number" id="paymentFeePercent" min="0" max="100" step="0.01" placeholder="2.9">
+                    </div>
+                    <div class="field-group">
+                        <label for="transactionFixedFee">Transaction Fixed Fee</label>
+                        <input type="number" id="transactionFixedFee" min="0" step="0.01" placeholder="0.30">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <label for="platformFeePercent">Platform Fee (%)</label>
+                        <input type="number" id="platformFeePercent" min="0" max="100" step="0.01" placeholder="0">
+                    </div>
+                    <div class="field-group">
+                        <label for="returnRate">Return/Refund Rate (%)</label>
+                        <input type="number" id="returnRate" min="0" max="100" step="0.1" placeholder="5">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <label for="returnCost">Return Cost per Order</label>
+                        <input type="number" id="returnCost" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="field-group">
+                        <label for="vatRate">VAT/Tax Rate (%)</label>
+                        <input type="number" id="vatRate" min="0" max="100" step="0.01" placeholder="0">
+                    </div>
+                </div>
+
+                <div class="field-group toggle-row">
+                    <label class="toggle-label">
+                        <input type="checkbox" id="includeVat">
+                        <span class="toggle-switch"></span>
+                        Include VAT in calculations
+                    </label>
+                </div>
+
+                <h2>Pricing & Ad Inputs</h2>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <label for="sellingPrice">Planned Selling Price</label>
+                        <input type="number" id="sellingPrice" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                    <div class="field-group">
+                        <label for="discountPercent">Discount (%)</label>
+                        <input type="number" id="discountPercent" min="0" max="100" step="0.1" placeholder="0">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <label for="targetMargin">Target Profit Margin (%)</label>
+                        <input type="number" id="targetMargin" min="0" max="100" step="0.1" placeholder="30">
+                    </div>
+                    <div class="field-group">
+                        <label for="estimatedCPA">Estimated CPA</label>
+                        <input type="number" id="estimatedCPA" min="0" step="0.01" placeholder="0.00">
+                    </div>
+                </div>
+
+                <div class="field-row">
+                    <div class="field-group">
+                        <label for="estimatedROAS">Estimated ROAS</label>
+                        <input type="number" id="estimatedROAS" min="0" step="0.01" placeholder="3.0">
+                    </div>
+                    <div class="field-group">
+                        <label for="aovOverride">AOV Override (optional)</label>
+                        <input type="number" id="aovOverride" min="0" step="0.01" placeholder="Leave blank to use selling price">
+                    </div>
+                </div>
+
+                <div class="action-buttons">
+                    <button id="btnCalculate" class="btn btn-primary">Calculate</button>
+                    <button id="btnReset" class="btn btn-secondary">Reset</button>
+                    <button id="btnSample" class="btn btn-accent">Sample Data</button>
+                </div>
+            </section>
+
+            <!-- OUTPUT PANEL -->
+            <section class="panel output-panel">
+                <h2>Results</h2>
+
+                <!-- Core Pricing -->
+                <div class="result-section">
+                    <h3>Core Pricing</h3>
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <span class="result-label">Final Selling Price</span>
+                            <span class="result-value" id="outFinalPrice">—</span>
+                        </div>
+                        <div class="result-card">
+                            <span class="result-label">Total Cost (before ads)</span>
+                            <span class="result-value" id="outTotalCost">—</span>
+                        </div>
+                        <div class="result-card">
+                            <span class="result-label">Total Cost (incl. returns)</span>
+                            <span class="result-value" id="outTotalCostReturns">—</span>
+                        </div>
+                        <div class="result-card">
+                            <span class="result-label">Profit Before Ads</span>
+                            <span class="result-value" id="outProfitBeforeAds">—</span>
+                        </div>
+                        <div class="result-card highlight">
+                            <span class="result-label">Net Profit After CPA</span>
+                            <span class="result-value" id="outNetProfit">—</span>
+                        </div>
+                        <div class="result-card">
+                            <span class="result-label">Profit Margin</span>
+                            <span class="result-value" id="outProfitMargin">—</span>
+                        </div>
+                        <div class="result-card">
+                            <span class="result-label">Gross Margin</span>
+                            <span class="result-value" id="outGrossMargin">—</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Break-Even -->
+                <div class="result-section">
+                    <h3>Break-Even Analysis</h3>
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <span class="result-label">Break-Even CPA</span>
+                            <span class="result-value" id="outBreakEvenCPA">—</span>
+                        </div>
+                        <div class="result-card">
+                            <span class="result-label">Break-Even ROAS</span>
+                            <span class="result-value" id="outBreakEvenROAS">—</span>
+                        </div>
+                        <div class="result-card">
+                            <span class="result-label">Min Viable Selling Price</span>
+                            <span class="result-value" id="outMinPrice">—</span>
+                        </div>
+                        <div class="result-card">
+                            <span class="result-label">Recommended Price (target margin)</span>
+                            <span class="result-value" id="outRecommendedPrice">—</span>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Decision Support -->
+                <div class="result-section">
+                    <h3>Decision Support</h3>
+                    <div class="results-grid">
+                        <div class="result-card">
+                            <span class="result-label">Safe Discount Room</span>
+                            <span class="result-value" id="outDiscountRoom">—</span>
+                        </div>
+                        <div class="result-card verdict-card" id="verdictCard">
+                            <span class="result-label">Business Verdict</span>
+                            <span class="result-value verdict" id="outVerdict">—</span>
+                        </div>
+                    </div>
+                    <div id="warningsContainer" class="warnings-container"></div>
+                </div>
+
+                <!-- Summary Box -->
+                <div class="result-section">
+                    <h3>Summary</h3>
+                    <div class="summary-box" id="summaryBox">
+                        Enter your product details and click Calculate to see a full analysis.
+                    </div>
+                </div>
+
+                <!-- Scenario Comparison -->
+                <div class="result-section">
+                    <h3>Scenario Comparison</h3>
+                    <div class="scenarios-grid">
+                        <div class="scenario-card" id="scenarioNoAds">
+                            <h4>No Ads</h4>
+                            <div class="scenario-line"><span>Profit:</span><span id="scenNoAdsProfit">—</span></div>
+                            <div class="scenario-line"><span>Margin:</span><span id="scenNoAdsMargin">—</span></div>
+                            <div class="scenario-verdict" id="scenNoAdsVerdict">—</div>
+                        </div>
+                        <div class="scenario-card" id="scenarioModerate">
+                            <h4>Moderate Ads</h4>
+                            <p class="scenario-desc">CPA at 50% of break-even</p>
+                            <div class="scenario-line"><span>Profit:</span><span id="scenModProfit">—</span></div>
+                            <div class="scenario-line"><span>Margin:</span><span id="scenModMargin">—</span></div>
+                            <div class="scenario-verdict" id="scenModVerdict">—</div>
+                        </div>
+                        <div class="scenario-card" id="scenarioAggressive">
+                            <h4>Aggressive Ads</h4>
+                            <p class="scenario-desc">CPA at 90% of break-even</p>
+                            <div class="scenario-line"><span>Profit:</span><span id="scenAggProfit">—</span></div>
+                            <div class="scenario-line"><span>Margin:</span><span id="scenAggMargin">—</span></div>
+                            <div class="scenario-verdict" id="scenAggVerdict">—</div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Export Buttons -->
+                <div class="export-buttons">
+                    <button id="btnCopy" class="btn btn-secondary">Copy Summary</button>
+                    <button id="btnDownload" class="btn btn-secondary">Download as TXT</button>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <footer>
+        <p>Kara3 Internal Tool &mdash; Pricing & Profit Calculator</p>
+    </footer>
+
+    <script src="app.js"></script>
+</body>
+</html>
